@@ -19,7 +19,7 @@ INFO = [
     [("─" * 14, DIM, reg)],
     [("Name   ", ARCH, bold), ("Ekaitz Llano Alonso", BLANCO, bold)],
     [("Role   ", ARCH, bold), ("Técnico Modern Workplace", FG, reg)],
-    [("OS     ", ARCH, bold), ("CachyOS Linux", FG, reg)],
+    [("OS     ", ARCH, bold), ("CachyOS · Linux", FG, reg)],
     [("Stack  ", ARCH, bold), ("Linux · Microsoft 365", FG, reg)],
     [("Git    ", ARCH, bold), ("github.com/EkaitzLlano", FG, reg)],
 ]
