@@ -1,14 +1,12 @@
-"""Firma de correo estilo fastfetch: logo ASCII de Arch + ficha, paleta Tokyo Night,
-fila de colores con los cuatro de Microsoft (guiño a Modern Workplace).
+"""Firma de correo estilo fastfetch: logo ASCII de Arch + ficha, paleta Tokyo Night.
 Fotograma 0 = firma completa (20 ms) para clientes que no animan; se reproduce una vez."""
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
 S = 2
-W, H = 414, 262
+W = 414
 BG, BAR, LINEA = "#1a1b26", "#16161e", "#292e42"
 DIM, FG, ARCH, BLANCO = "#565f89", "#c0caf5", "#1793d1", "#e0e6ff"
-MS = ["#f25022", "#7fba00", "#00a4ef", "#ffb900"]
 F = "/usr/share/fonts/TTF/JetBrainsMonoNerdFontMono-"
 reg, bold, peq = (ImageFont.truetype(F + "Regular.ttf", 13 * S), ImageFont.truetype(F + "Bold.ttf", 13 * S),
                   ImageFont.truetype(F + "Regular.ttf", 11 * S))
@@ -21,15 +19,15 @@ INFO = [
     [("─" * 14, DIM, reg)],
     [("Name   ", ARCH, bold), ("Ekaitz Llano Alonso", BLANCO, bold)],
     [("Role   ", ARCH, bold), ("Técnico Modern Workplace", FG, reg)],
-    [("OS     ", ARCH, bold), ("CachyOS · Arch Linux", FG, reg)],
+    [("OS     ", ARCH, bold), ("CachyOS Linux", FG, reg)],
     [("Stack  ", ARCH, bold), ("Linux · Microsoft 365", FG, reg)],
     [("Git    ", ARCH, bold), ("github.com/EkaitzLlano", FG, reg)],
-    None,                                          # fila de colores
 ]
 LH, X0, TOP_CMD = 19, 22, 47
 TOP_INFO = TOP_CMD + LH + 8
 XI = X0 + 15 * CW + 6
 TOP_FIN = TOP_INFO + len(INFO) * LH + 8
+H = TOP_FIN + LH + 9
 CMD = "fastfetch"
 
 def base(d):
@@ -56,9 +54,6 @@ def fotograma(nchar, nlin, final, cursor):
     for i in range(min(nlin, len(INFO))):
         top = TOP_INFO + i * LH
         if i < len(LOGO): d.text((X0 * S, bl(top)), LOGO[i], font=bold, fill=ARCH, anchor="ls")
-        if INFO[i] is None:
-            for k, c in enumerate(MS): d.rectangle(((XI + k * 3 * CW) * S, bl(top) - 11 * S, (XI + k * 3 * CW + 2.4 * CW) * S, bl(top) + 2 * S), fill=c)
-            continue
         x = XI * S
         for txt, col, fnt in INFO[i]:
             d.text((x, bl(top)), txt, font=fnt, fill=col, anchor="ls"); x += d.textlength(txt, font=fnt)
